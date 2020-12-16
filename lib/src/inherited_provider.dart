@@ -60,7 +60,7 @@ class InheritedProvider<T> extends SingleChildStatelessWidget {
     T Function(BuildContext context, T value)? update,
     UpdateShouldNotify<T>? updateShouldNotify,
     void Function(T? value)? debugCheckInvalidValueType,
-    StartListening<T?>? startListening,
+    StartListening<T>? startListening,
     Dispose<T>? dispose,
     this.builder,
     bool? lazy,
@@ -597,7 +597,7 @@ class _CreateInheritedProvider<T> extends _Delegate<T> {
   final T Function(BuildContext context, T value)? update;
   final UpdateShouldNotify<T>? _updateShouldNotify;
   final void Function(T? value)? debugCheckInvalidValueType;
-  final StartListening<T?>? startListening;
+  final StartListening<T>? startListening;
   final Dispose<T>? dispose;
 
   @override
@@ -686,9 +686,11 @@ class _CreateInheritedProviderState<T>
     }
 
     element!._isNotifyDependentsEnabled = false;
-    _removeListener ??= delegate.startListening?.call(element!, _value);
-    element!._isNotifyDependentsEnabled = true;
-    assert(delegate.startListening == null || _removeListener != null);
+    if (_value is T) {
+      _removeListener ??= delegate.startListening?.call(element!, _value as T);
+      element!._isNotifyDependentsEnabled = true;
+      assert(delegate.startListening == null || _removeListener != null);
+    }
     return _value;
   }
 
