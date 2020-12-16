@@ -2401,7 +2401,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
     expect(buildCount, 4);
   });
 
-  testWidgets('throws ProviderNotFound if lookup fails within create',
+  testWidgets('throws ProviderNotFoundException if lookup fails within create',
       (tester) async {
     await tester.pumpWidget(Provider(
       lazy: false,
