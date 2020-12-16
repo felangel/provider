@@ -61,7 +61,7 @@ class InheritedProvider<T> extends SingleChildStatelessWidget {
     UpdateShouldNotify<T>? updateShouldNotify,
     void Function(T? value)? debugCheckInvalidValueType,
     StartListening<T>? startListening,
-    Dispose<T?>? dispose,
+    Dispose<T>? dispose,
     this.builder,
     bool? lazy,
     Widget? child,
@@ -598,7 +598,7 @@ class _CreateInheritedProvider<T> extends _Delegate<T> {
   final UpdateShouldNotify<T>? _updateShouldNotify;
   final void Function(T? value)? debugCheckInvalidValueType;
   final StartListening<T>? startListening;
-  final Dispose<T?>? dispose;
+  final Dispose<T>? dispose;
 
   @override
   _CreateInheritedProviderState<T> createState() =>
@@ -696,8 +696,8 @@ class _CreateInheritedProviderState<T>
   void dispose() {
     super.dispose();
     _removeListener?.call();
-    if (_didInitValue) {
-      delegate.dispose?.call(element!, _value);
+    if (_didInitValue && _value is T) {
+      delegate.dispose?.call(element!, _value as T);
     }
   }
 

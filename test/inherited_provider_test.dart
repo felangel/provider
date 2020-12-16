@@ -2588,7 +2588,7 @@ class StateNotifierProvider<Controller extends StateNotifier<Value>, Value>
         assert(debugIsInInheritedProviderUpdate);
         return controller..update(context.watch);
       },
-      dispose: (_, controller) => controller?.dispose(),
+      dispose: (_, controller) => controller.dispose(),
       child: DeferredInheritedProvider<Controller, Value>(
         lazy: lazy,
         create: (context) {

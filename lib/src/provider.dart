@@ -193,7 +193,7 @@ class Provider<T> extends InheritedProvider<T> {
   Provider({
     Key? key,
     required Create<T> create,
-    Dispose<T?>? dispose,
+    Dispose<T>? dispose,
     bool? lazy,
     TransitionBuilder? builder,
     Widget? child,
