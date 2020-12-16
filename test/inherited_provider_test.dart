@@ -701,7 +701,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
     testWidgets('startListening called again when create returns new value',
         (tester) async {
       final stopListening = StopListeningMock();
-      final startListening = StartListeningMock<int>(stopListening);
+      final startListening = StartListeningMock<int?>(stopListening);
 
       await tester.pumpWidget(
         InheritedProvider<int>.value(
@@ -718,7 +718,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
       verifyZeroInteractions(stopListening);
 
       final stopListening2 = StopListeningMock();
-      final startListening2 = StartListeningMock<int>(stopListening2);
+      final startListening2 = StartListeningMock<int?>(stopListening2);
 
       await tester.pumpWidget(
         InheritedProvider<int>.value(
@@ -744,7 +744,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
 
     testWidgets('startListening', (tester) async {
       final stopListening = StopListeningMock();
-      final startListening = StartListeningMock<int>(stopListening);
+      final startListening = StartListeningMock<int?>(stopListening);
 
       await tester.pumpWidget(
         InheritedProvider<int>.value(
@@ -791,7 +791,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
       "stopListening not called twice if rebuild doesn't have listeners",
       (tester) async {
         final stopListening = StopListeningMock();
-        final startListening = StartListeningMock<int>(stopListening);
+        final startListening = StartListeningMock<int?>(stopListening);
 
         await tester.pumpWidget(
           InheritedProvider<int>.value(
@@ -804,7 +804,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
         verifyZeroInteractions(stopListening);
 
         final stopListening2 = StopListeningMock();
-        final startListening2 = StartListeningMock<int>(stopListening2);
+        final startListening2 = StartListeningMock<int?>(stopListening2);
         await tester.pumpWidget(
           InheritedProvider<int>.value(
             value: 24,
@@ -1101,7 +1101,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
 
     testWidgets('startListening', (tester) async {
       final stopListening = StopListeningMock();
-      final startListening = StartListeningMock<int>(stopListening);
+      final startListening = StartListeningMock<int?>(stopListening);
       final dispose = DisposeMock<int>();
 
       await tester.pumpWidget(
@@ -1147,7 +1147,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
     testWidgets('startListening called again when create returns new value',
         (tester) async {
       final stopListening = StopListeningMock();
-      final startListening = StartListeningMock<int>(stopListening);
+      final startListening = StartListeningMock<int?>(stopListening);
 
       await tester.pumpWidget(
         InheritedProvider<int>(
@@ -1164,7 +1164,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
       verifyZeroInteractions(stopListening);
 
       final stopListening2 = StopListeningMock();
-      final startListening2 = StartListeningMock<int>(stopListening2);
+      final startListening2 = StartListeningMock<int?>(stopListening2);
 
       await tester.pumpWidget(
         InheritedProvider<int>(
@@ -1192,7 +1192,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
       "stopListening not called twice if rebuild doesn't have listeners",
       (tester) async {
         final stopListening = StopListeningMock();
-        final startListening = StartListeningMock<int>(stopListening);
+        final startListening = StartListeningMock<int?>(stopListening);
 
         await tester.pumpWidget(
           InheritedProvider<int>(
@@ -1205,7 +1205,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
         verifyZeroInteractions(stopListening);
 
         final stopListening2 = StopListeningMock();
-        final startListening2 = StartListeningMock<int>(stopListening2);
+        final startListening2 = StartListeningMock<int?>(stopListening2);
         await tester.pumpWidget(
           InheritedProvider<int>(
             update: (_, __) => 24,
@@ -2037,7 +2037,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
   });
 
   testWidgets('startListening markNeedsNotifyDependents', (tester) async {
-    InheritedContext<int>? element;
+    InheritedContext<int?>? element;
     var buildCount = 0;
 
     await tester.pumpWidget(
@@ -2146,7 +2146,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
   });
 
   testWidgets('InheritedProvider lazy loading can be disabled', (tester) async {
-    final startListening = StartListeningMock<int>(() {});
+    final startListening = StartListeningMock<int?>(() {});
 
     await tester.pumpWidget(
       InheritedProvider(
@@ -2162,7 +2162,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
 
   testWidgets('InheritedProvider.value lazy loading can be disabled',
       (tester) async {
-    final startListening = StartListeningMock<int>(() {});
+    final startListening = StartListeningMock<int?>(() {});
 
     await tester.pumpWidget(
       InheritedProvider.value(

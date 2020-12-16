@@ -36,7 +36,7 @@ typedef Dispose<T> = void Function(BuildContext context, T value);
 /// - [DeferredStartListening], a variant of this typedef for more advanced
 ///   listening.
 typedef StartListening<T> = VoidCallback Function(
-    InheritedContext<T> element, T? value);
+    InheritedContext<T> element, T value);
 
 /// A generic implementation of an [InheritedWidget].
 ///
@@ -60,7 +60,7 @@ class InheritedProvider<T> extends SingleChildStatelessWidget {
     T Function(BuildContext context, T value)? update,
     UpdateShouldNotify<T>? updateShouldNotify,
     void Function(T? value)? debugCheckInvalidValueType,
-    StartListening<T>? startListening,
+    StartListening<T?>? startListening,
     Dispose<T>? dispose,
     this.builder,
     bool? lazy,
@@ -597,7 +597,7 @@ class _CreateInheritedProvider<T> extends _Delegate<T> {
   final T Function(BuildContext context, T value)? update;
   final UpdateShouldNotify<T>? _updateShouldNotify;
   final void Function(T? value)? debugCheckInvalidValueType;
-  final StartListening<T>? startListening;
+  final StartListening<T?>? startListening;
   final Dispose<T>? dispose;
 
   @override
