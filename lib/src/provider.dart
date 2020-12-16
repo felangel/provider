@@ -193,7 +193,7 @@ class Provider<T> extends InheritedProvider<T> {
   Provider({
     Key? key,
     required Create<T> create,
-    Dispose<T>? dispose,
+    Dispose<T?>? dispose,
     bool? lazy,
     TransitionBuilder? builder,
     Widget? child,
@@ -205,8 +205,8 @@ class Provider<T> extends InheritedProvider<T> {
           dispose: dispose,
           debugCheckInvalidValueType: kReleaseMode
               ? null
-              : (T value) =>
-                  Provider.debugCheckInvalidValueType?.call<T>(value),
+              : (T? value) =>
+                  Provider.debugCheckInvalidValueType?.call<T?>(value),
           child: child,
         );
 
@@ -280,8 +280,7 @@ The context used was: $context
     if (listen) {
       context.dependOnInheritedElement(inheritedElement);
     }
-
-    return inheritedElement.value;
+    return inheritedElement.value as T;
   }
 
   static _InheritedProviderScopeElement<T> _inheritedElementOf<T>(

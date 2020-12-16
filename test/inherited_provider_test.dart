@@ -1058,7 +1058,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
       },
     );
     testWidgets('_debugCheckInvalidValueType', (tester) async {
-      final checkType = DebugCheckValueTypeMock<int>();
+      final checkType = DebugCheckValueTypeMock<int?>();
 
       await tester.pumpWidget(
         InheritedProvider<int>(
@@ -2400,6 +2400,38 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
     expect(find.text('true true'), findsOneWidget);
     expect(buildCount, 4);
   });
+
+  testWidgets('throws ProviderNotFound if lookup fails within create',
+      (tester) async {
+    await tester.pumpWidget(Provider(
+      lazy: false,
+      create: (context) {
+        context.read<String>();
+        return 42;
+      },
+      child: const SizedBox(),
+    ));
+    final dynamic exception = tester.takeException();
+    expect(
+      exception,
+      isA<ProviderNotFoundException>().having(
+        (e) => e.valueType,
+        'valueType',
+        String,
+      ),
+    );
+  });
+
+  testWidgets('propagates exceptions within create', (tester) async {
+    final e = Exception('oops');
+    await tester.pumpWidget(Provider(
+      lazy: false,
+      create: (context) => throw e,
+      child: const SizedBox(),
+    ));
+    final dynamic exception = tester.takeException();
+    expect(exception, equals(e));
+  });
 }
 
 class Model {
@@ -2556,7 +2588,7 @@ class StateNotifierProvider<Controller extends StateNotifier<Value>, Value>
         assert(debugIsInInheritedProviderUpdate);
         return controller..update(context.watch);
       },
-      dispose: (_, controller) => controller.dispose(),
+      dispose: (_, controller) => controller?.dispose(),
       child: DeferredInheritedProvider<Controller, Value>(
         lazy: lazy,
         create: (context) {

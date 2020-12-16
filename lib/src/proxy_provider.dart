@@ -75,7 +75,7 @@ class ProxyProvider0<R> extends InheritedProvider<R> {
     Create<R>? create,
     required R Function(BuildContext context, R value) update,
     UpdateShouldNotify<R>? updateShouldNotify,
-    Dispose<R>? dispose,
+    Dispose<R?>? dispose,
     bool? lazy,
     TransitionBuilder? builder,
     Widget? child,
@@ -89,8 +89,8 @@ class ProxyProvider0<R> extends InheritedProvider<R> {
           updateShouldNotify: updateShouldNotify,
           debugCheckInvalidValueType: kReleaseMode
               ? null
-              : (R value) =>
-                  Provider.debugCheckInvalidValueType?.call<R>(value),
+              : (R? value) =>
+                  Provider.debugCheckInvalidValueType?.call<R?>(value),
           child: child,
         );
 }
@@ -148,7 +148,7 @@ class ProxyProvider<T, R> extends ProxyProvider0<R> {
     Create<R>? create,
     required ProxyProviderBuilder<T, R> update,
     UpdateShouldNotify<R>? updateShouldNotify,
-    Dispose<R>? dispose,
+    Dispose<R?>? dispose,
     bool? lazy,
     TransitionBuilder? builder,
     Widget? child,
@@ -176,7 +176,7 @@ class ProxyProvider2<T, T2, R> extends ProxyProvider0<R> {
     Create<R>? create,
     required ProxyProviderBuilder2<T, T2, R> update,
     UpdateShouldNotify<R>? updateShouldNotify,
-    Dispose<R>? dispose,
+    Dispose<R?>? dispose,
     bool? lazy,
     TransitionBuilder? builder,
     Widget? child,
@@ -205,7 +205,7 @@ class ProxyProvider3<T, T2, T3, R> extends ProxyProvider0<R> {
     Create<R>? create,
     required ProxyProviderBuilder3<T, T2, T3, R> update,
     UpdateShouldNotify<R>? updateShouldNotify,
-    Dispose<R>? dispose,
+    Dispose<R?>? dispose,
     bool? lazy,
     TransitionBuilder? builder,
     Widget? child,
@@ -235,7 +235,7 @@ class ProxyProvider4<T, T2, T3, T4, R> extends ProxyProvider0<R> {
     Create<R>? create,
     required ProxyProviderBuilder4<T, T2, T3, T4, R> update,
     UpdateShouldNotify<R>? updateShouldNotify,
-    Dispose<R>? dispose,
+    Dispose<R?>? dispose,
     bool? lazy,
     TransitionBuilder? builder,
     Widget? child,
@@ -266,7 +266,7 @@ class ProxyProvider5<T, T2, T3, T4, T5, R> extends ProxyProvider0<R> {
     Create<R>? create,
     required ProxyProviderBuilder5<T, T2, T3, T4, T5, R> update,
     UpdateShouldNotify<R>? updateShouldNotify,
-    Dispose<R>? dispose,
+    Dispose<R?>? dispose,
     bool? lazy,
     TransitionBuilder? builder,
     Widget? child,
@@ -298,7 +298,7 @@ class ProxyProvider6<T, T2, T3, T4, T5, T6, R> extends ProxyProvider0<R> {
     Create<R>? create,
     required ProxyProviderBuilder6<T, T2, T3, T4, T5, T6, R> update,
     UpdateShouldNotify<R>? updateShouldNotify,
-    Dispose<R>? dispose,
+    Dispose<R?>? dispose,
     bool? lazy,
     TransitionBuilder? builder,
     Widget? child,
