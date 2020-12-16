@@ -59,7 +59,7 @@ class InheritedProvider<T> extends SingleChildStatelessWidget {
     Create<T>? create,
     T Function(BuildContext context, T value)? update,
     UpdateShouldNotify<T>? updateShouldNotify,
-    void Function(T? value)? debugCheckInvalidValueType,
+    void Function(T value)? debugCheckInvalidValueType,
     StartListening<T>? startListening,
     Dispose<T>? dispose,
     this.builder,
@@ -596,7 +596,7 @@ class _CreateInheritedProvider<T> extends _Delegate<T> {
   final Create<T>? create;
   final T Function(BuildContext context, T value)? update;
   final UpdateShouldNotify<T>? _updateShouldNotify;
-  final void Function(T? value)? debugCheckInvalidValueType;
+  final void Function(T value)? debugCheckInvalidValueType;
   final StartListening<T>? startListening;
   final Dispose<T>? dispose;
 
@@ -679,7 +679,9 @@ class _CreateInheritedProviderState<T>
         }
 
         assert(() {
-          delegate.debugCheckInvalidValueType?.call(_value);
+          if (_value is T) {
+            delegate.debugCheckInvalidValueType?.call(_value as T);
+          }
           return true;
         }());
       }

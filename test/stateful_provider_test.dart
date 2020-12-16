@@ -12,7 +12,7 @@ class ValueBuilder extends Mock {
 }
 
 class Dispose extends Mock {
-  void call(BuildContext context, int? value);
+  void call(BuildContext context, int value);
 }
 
 void main() {

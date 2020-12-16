@@ -205,8 +205,8 @@ class Provider<T> extends InheritedProvider<T> {
           dispose: dispose,
           debugCheckInvalidValueType: kReleaseMode
               ? null
-              : (T? value) =>
-                  Provider.debugCheckInvalidValueType?.call<T?>(value),
+              : (T value) =>
+                  Provider.debugCheckInvalidValueType?.call<T>(value),
           child: child,
         );
 

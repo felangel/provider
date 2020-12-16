@@ -1058,7 +1058,7 @@ DeferredInheritedProvider<int, int>(controller: 42, value: 24)'''),
       },
     );
     testWidgets('_debugCheckInvalidValueType', (tester) async {
-      final checkType = DebugCheckValueTypeMock<int?>();
+      final checkType = DebugCheckValueTypeMock<int>();
 
       await tester.pumpWidget(
         InheritedProvider<int>(
